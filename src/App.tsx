@@ -3,20 +3,26 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Weather from "./components/Weather";
 import styled from "styled-components";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import ProtectedRoute from "./Pages/ProtectedRoute";
+import PageNotFound from "./components/PageNotFound";
 
 const App: React.FC = () => {
-  console.log("App component");
   return (
     <Router>
       <Container>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/weather" element={<Weather />} />
+          <Route index element={<Login />} />
+          <Route
+            path="weather"
+            element={
+              <ProtectedRoute>
+                <Weather />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Container>
-      <ToastContainer />
     </Router>
   );
 };

@@ -3,24 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchWeather } from "../store/weatherSlice";
 import { RootState, AppDispatch } from "../store/store";
 import styled from "styled-components";
-import { toast } from "react-toastify";
 import { logout } from "../store/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Weather: React.FC = () => {
   const [city, setCity] = useState("");
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const weather = useSelector((state: RootState) => state.weather);
 
   const handleLogout = () => {
     dispatch(logout());
+    navigate("/");
   };
 
   const handleFetchWeather = () => {
-    dispatch(fetchWeather(city)).then(() => {
-      if (weather.error) {
-        toast.error(weather.error);
-      }
-    });
+    dispatch(fetchWeather(city));
   };
 
   return (
@@ -37,12 +35,13 @@ const Weather: React.FC = () => {
         {weather.loading && <Message>Loading...</Message>}
         {!weather.loading && !weather.error && (
           <WeatherInfo>
-            <Info>Temperature: {weather.temperature}K</Info>
+            <Info>Temperature: {weather.temperature}°C</Info>
             <Info>Condition: {weather.condition}</Info>
             <Info>Humidity: {weather.humidity}%</Info>
-            <Info>Wind Speed: {weather.windSpeed} m/s</Info>
+            <Info>Wind Speed: {weather.windSpeed} km/h</Info>
           </WeatherInfo>
         )}
+        {weather.error && <Message>{weather.error}</Message>}
       </Container>
     </>
   );
