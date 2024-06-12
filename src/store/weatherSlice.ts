@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+const { VITE_WEATHER_APIKEY } = import.meta.env;
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 interface WeatherState {
   temperature: number;
@@ -12,7 +13,7 @@ interface WeatherState {
 
 const initialState: WeatherState = {
   temperature: 0,
-  condition: '',
+  condition: "",
   humidity: 0,
   windSpeed: 0,
   loading: false,
@@ -20,19 +21,21 @@ const initialState: WeatherState = {
 };
 
 export const fetchWeather = createAsyncThunk(
-  'weather/fetchWeather',
+  "weather/fetchWeather",
   async (city: string, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=YOUR_API_KEY`);
+      const response = await axios.get(
+        `http://api.weatherapi.com/v1/current.json?key=${VITE_WEATHER_APIKEY}&q=${city}&aqi=no`
+      );
       return response.data;
     } catch (error: any) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response.data.error.message);
     }
   }
 );
 
 const weatherSlice = createSlice({
-  name: 'weather',
+  name: "weather",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -40,13 +43,16 @@ const weatherSlice = createSlice({
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(fetchWeather.fulfilled, (state, action: PayloadAction<any>) => {
-      state.loading = false;
-      state.temperature = action.payload.main.temp;
-      state.condition = action.payload.weather[0].description;
-      state.humidity = action.payload.main.humidity;
-      state.windSpeed = action.payload.wind.speed;
-    });
+    builder.addCase(
+      fetchWeather.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.temperature = action.payload.current.temp_c;
+        state.condition = action.payload.current.condition.text;
+        state.humidity = action.payload.current.humidity;
+        state.windSpeed = action.payload.current.wind_mph;
+      }
+    );
     builder.addCase(fetchWeather.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload as string;
