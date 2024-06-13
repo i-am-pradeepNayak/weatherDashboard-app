@@ -14,6 +14,7 @@ import {
   List,
   RemoveBtn,
 } from "./Modal.styles";
+const { VITE_API_ENDPOINT } = import.meta.env;
 
 const Modal: React.FC = () => {
   const weather = useSelector((state: RootState) => state.weather);
@@ -32,7 +33,7 @@ const Modal: React.FC = () => {
   };
 
   const handleCityRemove = async () => {
-    await axios.delete(`http://localhost:3001/cities/${weather.cityId}`);
+    await axios.delete(`${VITE_API_ENDPOINT}/cities/${weather.cityId}`);
     if (auth.user) {
       dispatch(fetchFavCityListData(auth.user?.id));
       dispatch(handleModal(null));

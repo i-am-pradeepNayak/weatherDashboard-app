@@ -1,4 +1,4 @@
-const { VITE_WEATHER_APIKEY } = import.meta.env;
+const { VITE_WEATHER_APIKEY, VITE_API_ENDPOINT } = import.meta.env;
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -34,6 +34,9 @@ const initialState: WeatherState = {
   error: null,
 };
 
+
+
+
 export const fetchWeather = createAsyncThunk(
   "weather/fetchWeather",
   async (city: string, { rejectWithValue }) => {
@@ -56,7 +59,7 @@ export const fetchFavCityListData = createAsyncThunk(
   "weather/FavCityList",
   async (userId: number, { rejectWithValue }) => {
     try {
-      const response = await axios.get("http://localhost:3001/cities", {
+      const response = await axios.get(`${VITE_API_ENDPOINT}/cities`, {
         params: {
           userId,
         },

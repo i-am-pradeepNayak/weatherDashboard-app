@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchFavCityListData,
-} from "../../store/slice/weatherSlice";
+import { fetchFavCityListData } from "../../store/slice/weatherSlice";
 import { RootState, AppDispatch } from "../../store/store";
 import { logout } from "../../store/slice/authSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import WeatherForecast from "./WeatherForecast" 
-import FavoriteCities from "./FavoriteCities" 
+import WeatherForecast from "./WeatherForecast";
+import FavoriteCities from "./FavoriteCities";
 import Modal from "../../Pages/Modal";
 import { LogoutButton, Main } from "./styles/Weather.styles";
+const { VITE_API_ENDPOINT } = import.meta.env;
 
 const Weather: React.FC = () => {
   const [city, setCity] = useState("");
@@ -40,12 +39,12 @@ const Weather: React.FC = () => {
     );
 
     if (cityExist) {
-      console.log('City already exists in the favorite list.');
+      console.log("City already exists in the favorite list.");
       return;
     }
 
     try {
-      await axios.post("http://localhost:3001/cities", newCity);
+      await axios.post(`${VITE_API_ENDPOINT}/cities`, newCity);
       dispatch(fetchFavCityListData(auth.user.id));
     } catch (e) {
       dispatch({ type: "weather/FavCityList/rejected", payload: e });
@@ -55,8 +54,12 @@ const Weather: React.FC = () => {
   return (
     <>
       <Main>
-      {weather.isModalOpen && !weather.cityListLoading && <Modal />}
-        <WeatherForecast city={city} setCity={setCity} handleAddToFavorite={handleAddToFavorite} />
+        {weather.isModalOpen && !weather.cityListLoading && <Modal />}
+        <WeatherForecast
+          city={city}
+          setCity={setCity}
+          handleAddToFavorite={handleAddToFavorite}
+        />
         <FavoriteCities />
       </Main>
       <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
@@ -65,5 +68,3 @@ const Weather: React.FC = () => {
 };
 
 export default Weather;
-
-

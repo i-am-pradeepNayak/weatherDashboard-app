@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+const { VITE_API_ENDPOINT } = import.meta.env;
 
 export interface AuthState { // Ensure this is exported
   isAuthenticated: boolean;
@@ -30,7 +31,7 @@ export const login = createAsyncThunk(
     }
 
     try {
-      const response = await axios.get('http://localhost:3001/users', {
+      const response = await axios.get(`${VITE_API_ENDPOINT}/users`, {
         params: {
           username,
           password,
