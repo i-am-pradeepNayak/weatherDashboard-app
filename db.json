@@ -1,10 +1,25 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "username": "test",
-        "password": "123"
-      }
-    ]
-  }
-  
+  "users": [
+    {
+      "username": "test",
+      "password": "1234"
+    }
+  ],
+  "cities": [
+    {
+      "id": "ec35",
+      "userId": 1,
+      "cityName": "Manipal"
+    },
+    {
+      "id": "0145",
+      "userId": 1,
+      "cityName": "udupi"
+    },
+    {
+      "id": "63ef",
+      "userId": 1,
+      "cityName": "Goa"
+    }
+  ]
+}

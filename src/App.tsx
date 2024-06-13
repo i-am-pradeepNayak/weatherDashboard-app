@@ -6,6 +6,7 @@ import styled from "styled-components";
 import ProtectedRoute from "./Pages/ProtectedRoute";
 import PageNotFound from "./components/PageNotFound";
 
+
 const App: React.FC = () => {
   return (
     <Router>

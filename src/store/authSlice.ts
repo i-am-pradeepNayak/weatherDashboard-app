@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 interface AuthState {
   isAuthenticated: boolean;
@@ -16,24 +16,31 @@ const initialState: AuthState = {
 };
 
 export const login = createAsyncThunk(
-  'auth/login',
-  async ({ username, password }: { username: string; password: string }, { rejectWithValue }) => {
+  "auth/login",
+  async (
+    { username, password }: { username: string; password: string },
+    { rejectWithValue }
+  ) => {
     if (!username || !password) {
-      return rejectWithValue('Username and password cannot be empty');
+      return rejectWithValue("Username and password cannot be empty");
     }
 
     try {
-      const response = await axios.get(`http://localhost:3001/users?username=${username}`);
-      
+      const response = await axios.get(`http://localhost:3001/users`, {
+        params: {
+          username: username,
+          password: password,
+        },
+      });
       if (response.data.length > 0) {
         const user = response.data[0];
         if (user.password === password) {
           return user;
         } else {
-          return rejectWithValue('Invalid password');
+          return rejectWithValue("Invalid password");
         }
       } else {
-        return rejectWithValue('User not found');
+        return rejectWithValue("User not found");
       }
     } catch (error: any) {
       return rejectWithValue(error.message);
@@ -42,7 +49,7 @@ export const login = createAsyncThunk(
 );
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     logout(state) {
