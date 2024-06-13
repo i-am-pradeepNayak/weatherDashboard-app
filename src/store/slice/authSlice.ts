@@ -30,7 +30,7 @@ export const login = createAsyncThunk(
     }
 
     try {
-      const response = await axios.get('https://weather-dashboard-app-ten.vercel.app/api/users', {
+      const response = await axios.get('http://localhost:3001/users', {
         params: {
           username,
           password,
