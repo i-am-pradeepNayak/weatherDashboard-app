@@ -46,7 +46,7 @@ export const fetchWeather = createAsyncThunk(
           "Please enter a city name to get weather info😊"
         );
       const response = await axios.get(
-        `http://api.weatherapi.com/v1/current.json?key=${VITE_WEATHER_APIKEY}&q=${city}&aqi=no`
+        `https://api.weatherapi.com/v1/current.json?key=${VITE_WEATHER_APIKEY}&q=${city}&aqi=no`
       );
       return response.data;
     } catch (error: any) {
