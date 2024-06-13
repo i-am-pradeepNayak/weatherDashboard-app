@@ -1,10 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./components/Login";
-import Weather from "./components/Weather";
+import Login from "./components/Auth/Login";
+import Weather from "./components/Weather/Weather";
 import styled from "styled-components";
 import ProtectedRoute from "./Pages/ProtectedRoute";
-import PageNotFound from "./components/PageNotFound";
+import PageNotFound from "./Pages/PageNotFound";
+
 
 const App: React.FC = () => {
   return (
