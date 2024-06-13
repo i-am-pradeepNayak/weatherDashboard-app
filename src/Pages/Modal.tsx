@@ -4,7 +4,7 @@ import {
   fetchFavCityListData,
   fetchWeather,
   handleModal,
-} from "../store/weatherSlice";
+} from "../store/slice/weatherSlice";
 import { AppDispatch, RootState } from "../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -27,8 +27,10 @@ const Modal: React.FC = () => {
 
   const handleCityRemove = async () => {
     await axios.delete(`http://localhost:3001/cities/${weather.cityId}`);
-    dispatch(fetchFavCityListData(auth.user?.id));
-    dispatch(handleModal(null));
+    if (auth.user) {
+      dispatch(fetchFavCityListData(auth.user?.id));
+      dispatch(handleModal(null));
+    }
   };
 
   return (
@@ -38,7 +40,7 @@ const Modal: React.FC = () => {
         <p>Condition: {weather.weatherData.condition}</p>
         <p>Humidity: {weather.weatherData.humidity}%</p>
         <p>Wind Speed: {weather.weatherData.windSpeed} km/h</p>
-        <button onClick={() => handleCityRemove()}>Remove from wishlist</button>
+        <button onClick={() => handleCityRemove()}>Remove From WishList</button>
         <CloseButton onClick={handleModalClose}>X</CloseButton>
       </ModalContent>
     </Overlay>

@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../store/authSlice";
-import { RootState, AppDispatch } from "../store/store";
-import styled from "styled-components";
+import { login } from "../../store/slice/authSlice";
+import { RootState, AppDispatch } from "../../store/store";
 import { useNavigate } from "react-router-dom";
+import {
+  Container,
+  Title,
+  Input,
+  Button,
+  Message,
+} from "./styles/Login.styles";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -17,11 +23,7 @@ const Login: React.FC = () => {
   }, [auth.isAuthenticated]);
 
   const handleLogin = async () => {
-    try {
-      await dispatch(login({ username, password })).unwrap();
-    } catch (e) {
-      console.log(e);
-    }
+    await dispatch(login({ username, password }));
   };
 
   return (
@@ -41,53 +43,9 @@ const Login: React.FC = () => {
       />
       <Button onClick={handleLogin}>Login</Button>
       {auth.loading && <Message>Loading...</Message>}
+      {!auth.loading && auth.error && <Message>{auth.error}</Message>}
     </Container>
   );
 };
 
 export default Login;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #f7f7f7;
-`;
-
-const Title = styled.h2`
-  margin-bottom: 20px;
-  color: #333;
-  font-size: 24px;
-  font-weight: 600;
-`;
-
-const Input = styled.input`
-  width: 300px;
-  padding: 15px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-`;
-
-const Button = styled.button`
-  width: 330px;
-  padding: 15px;
-  margin: 20px 0;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  &:hover {
-    background-color: #0056b3;
-  }
-`;
-
-const Message = styled.p`
-  color: #333;
-  margin-top: 10px;
-`;

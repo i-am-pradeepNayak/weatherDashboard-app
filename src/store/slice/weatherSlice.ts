@@ -36,8 +36,12 @@ const initialState: WeatherState = {
 
 export const fetchWeather = createAsyncThunk(
   "weather/fetchWeather",
-  async (city: any, { rejectWithValue }) => {
+  async (city: string, { rejectWithValue }) => {
     try {
+      if (city === "")
+        return rejectWithValue(
+          "Please enter a city name to get weather info😊"
+        );
       const response = await axios.get(
         `http://api.weatherapi.com/v1/current.json?key=${VITE_WEATHER_APIKEY}&q=${city}&aqi=no`
       );
@@ -50,9 +54,13 @@ export const fetchWeather = createAsyncThunk(
 
 export const fetchFavCityListData = createAsyncThunk(
   "weather/FavCityList",
-  async (userId: number | undefined, { rejectWithValue }) => {
+  async (userId: number, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:3001/cities`);
+      const response = await axios.get("http://localhost:3001/cities", {
+        params: {
+          userId,
+        },
+      });
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error.response.data.error.message);
@@ -113,6 +121,7 @@ const weatherSlice = createSlice({
       state.cityListLoading = true;
       state.error = null;
     });
+
     builder.addCase(
       fetchFavCityListData.fulfilled,
       (state, action: PayloadAction<any>) => {
@@ -120,6 +129,11 @@ const weatherSlice = createSlice({
         state.cityList = action.payload;
       }
     );
+
+    //favorite city
+    builder.addCase(fetchFavCityListData.rejected, (state) => {
+      state.cityListLoading = false;
+    });
   },
 });
 

@@ -21,8 +21,12 @@ export const login = createAsyncThunk(
     { username, password }: { username: string; password: string },
     { rejectWithValue }
   ) => {
-    if (!username || !password) {
-      return rejectWithValue("Username and password cannot be empty");
+    if (!username) {
+      return rejectWithValue("Username cannot be empty");
+    }
+
+    if (!password) {
+      return rejectWithValue("Password cannot be empty");
     }
 
     try {
