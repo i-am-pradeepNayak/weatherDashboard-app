@@ -15,14 +15,13 @@ const Main = styled.div`
 `;
 
 const LogoutButton = styled.button`
-  background: none;
+  padding: 10px 15px;
+  margin: 10px 0px;
+  background-color:#DC143C;
+  color: white;
   border: none;
-  color: Blue;
-  font-size: 18px;
-  cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;`
 
 export { Main, LogoutButton };

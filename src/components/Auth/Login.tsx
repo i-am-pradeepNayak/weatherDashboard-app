@@ -44,7 +44,7 @@ const Login: React.FC = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <Button onClick={handleLogin}>Login</Button>
-      {auth.loading && <Message>Loading...</Message>}
+      {/* {auth.loading && <Message>Loading...</Message>} */}
       {!auth.loading && auth.error && <Message>{auth.error}</Message>}
       </LoginContainer>
     </Container>
