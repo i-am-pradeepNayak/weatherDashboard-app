@@ -31,9 +31,8 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  width: 100%;
   padding: 15px;
-  margin: 20px 0;
+  margin: 10px 0;
   background-color: #007bff;
   color: white;
   border: none;
@@ -65,7 +64,7 @@ const Message = styled.p`
 `;
 
 const AddToFavoriteButton = styled.button`
-  width: 20%;
+  float : right;
   padding: 10px;
   margin: 10px 0;
   background-color: gray;

@@ -9,6 +9,7 @@ import {
   Input,
   Button,
   Message,
+  LoginContainer
 } from "./styles/Login.styles";
 
 const Login: React.FC = () => {
@@ -28,6 +29,7 @@ const Login: React.FC = () => {
 
   return (
     <Container>
+      <LoginContainer>
       <Title>Login</Title>
       <Input
         type="text"
@@ -44,6 +46,7 @@ const Login: React.FC = () => {
       <Button onClick={handleLogin}>Login</Button>
       {auth.loading && <Message>Loading...</Message>}
       {!auth.loading && auth.error && <Message>{auth.error}</Message>}
+      </LoginContainer>
     </Container>
   );
 };

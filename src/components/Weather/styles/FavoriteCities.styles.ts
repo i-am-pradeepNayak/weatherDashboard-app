@@ -18,15 +18,14 @@ const CityList = styled.ul`
   width: 100%;
   height: 65vh;
   list-style: none;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
+  padding-top: 15px;
 `;
 
 const CityItem = styled.li`
-  display: flex;
+ 
+  text-align : center;
   gap: 1.6rem;
   align-items: center;
   background-color: var(--color-dark--2);
@@ -36,6 +35,17 @@ const CityItem = styled.li`
   cursor: pointer;
   color: inherit;
   text-decoration: none;
+  border: 1px solid white;
+    margin-bottom: 5px;
+    background: #d7d7d729;
+    border-radius: 9px;
+    font-weight: 600;
+    width: 80%;
+    display: block;
+    margin: 4px auto;
+    &:hover  {
+      background : #bfbfbf;
+    }
 `;
 
 export { Container, CityList, CityItem };

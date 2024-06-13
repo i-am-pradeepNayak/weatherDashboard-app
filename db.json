@@ -2,13 +2,25 @@
   "users": [
     {
       "username": "test",
-      "password": "123"
+      "password": "123",
+      "id": "c0a3"
     }
   ],
   "cities": [
     {
-      "id": "aea3",
-      "cityName": ""
+      "id": "e4d9",
+      "userId": "c0a3",
+      "cityName": "udupi"
+    },
+    {
+      "id": "1bf8",
+      "userId": "c0a3",
+      "cityName": "Manipal"
+    },
+    {
+      "id": "17b2",
+      "userId": "c0a3",
+      "cityName": "Bangalore"
     }
   ]
 }

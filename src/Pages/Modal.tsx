@@ -36,11 +36,11 @@ const Modal: React.FC = () => {
   return (
     <Overlay>
       <ModalContent>
-        <p>Temperature: {weather.weatherData.temperature}°C</p>
-        <p>Condition: {weather.weatherData.condition}</p>
-        <p>Humidity: {weather.weatherData.humidity}%</p>
-        <p>Wind Speed: {weather.weatherData.windSpeed} km/h</p>
-        <button onClick={() => handleCityRemove()}>Remove From WishList</button>
+        <List><b>Temperature:</b> {weather.weatherData.temperature}°C</List>
+        <List><b>Condition: </b>{weather.weatherData.condition}</List>
+        <List><b>Humidity: </b>{weather.weatherData.humidity}%</List>
+        <List><b>Wind Speed: </b>{weather.weatherData.windSpeed} km/h</List>
+        <RemoveBtn onClick={() => handleCityRemove()}>Remove From WishList</RemoveBtn>
         <CloseButton onClick={handleModalClose}>X</CloseButton>
       </ModalContent>
     </Overlay>
@@ -63,11 +63,14 @@ const Overlay = styled.div`
 
 const ModalContent = styled.div`
   background-color: white;
-  padding: 20px;
+  padding: 23px;
   border-radius: 8px;
   position: relative;
   width: 80%;
   max-width: 500px;
+  -webkit-box-shadow: 0px 0px 18px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 18px -4px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 18px -4px rgba(0,0,0,0.75);
 `;
 
 const CloseButton = styled.button`
@@ -78,4 +81,18 @@ const CloseButton = styled.button`
   border: none;
   font-size: 18px;
   cursor: pointer;
+`;
+const List = styled.p`
+  margin-bottom : 10px;
+`;
+
+const RemoveBtn = styled.button`
+    float: right;
+    padding: 8px;
+    background: red;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top : 45px;
 `;

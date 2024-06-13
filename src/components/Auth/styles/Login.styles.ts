@@ -1,12 +1,19 @@
 import styled from "styled-components";
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  width: 100vw;
   background-color: #f7f7f7;
 `;
+
+const LoginContainer = styled.div`
+  background-color: #fff;
+  width : 400px;
+  padding : 20px;
+`;
+
 
 const Title = styled.h2`
   margin-bottom: 20px;
@@ -16,7 +23,7 @@ const Title = styled.h2`
 `;
 
 const Input = styled.input`
-  width: 300px;
+  width: 100%;
   padding: 15px;
   margin: 10px 0;
   border: 1px solid #ccc;
@@ -25,9 +32,10 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  width: 330px;
+  float : right;
+  width: 130px;
   padding: 15px;
-  margin: 20px 0;
+  margin-top : 20px;
   background-color: #007bff;
   color: white;
   border: none;
@@ -41,7 +49,7 @@ const Button = styled.button`
 
 const Message = styled.p`
   color: #333;
-  margin-top: 10px;
+  color : red;
 `;
 
-export { Container, Title, Input, Button, Message };
+export { Container, Title, Input, Button, Message , LoginContainer };

@@ -53,7 +53,7 @@ const WeatherForecast: React.FC<WeatherForecastProps> = ({
               <Info>Humidity: {weather.weatherData.humidity}%</Info>
               <Info>Wind Speed: {weather.weatherData.windSpeed} km/h</Info>
               <AddToFavoriteButton onClick={handleAddToFavorite}>
-                Add to WishList
+                Add to WishList 
               </AddToFavoriteButton>
             </WeatherInfo>
           </>
