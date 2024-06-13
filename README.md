@@ -22,26 +22,32 @@ To run the Weather Dashboard Application locally, follow these steps:
     cd weatherDashboard-app
     ```
 
-2. Install dependencies:
+2. Switch to the main Git branch:
+
+    ```sh
+    git checkout main
+    ```
+
+3. Install dependencies:
 
     ```sh
     npm install
     npm i json-server
     ```
 
-3. Start the JSON Server:
+4. Start the JSON Server:
 
     ```sh
     npm run server
     ```
 
-4. Start the Vite development server:
+5. Start the Vite development server:
 
     ```sh
     npm run dev
     ```
 
-5. Open your browser and navigate to:
+6. Open your browser and navigate to:
 
     ```sh
     http://localhost:5173/
