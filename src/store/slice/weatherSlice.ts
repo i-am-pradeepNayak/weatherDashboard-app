@@ -1,4 +1,4 @@
-const { VITE_WEATHER_APIKEY, VITE_API_ENDPOINT } = import.meta.env;
+const { VITE_WEATHER_APIKEY, VITE_API_ENDPOINT } = process.env;
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 

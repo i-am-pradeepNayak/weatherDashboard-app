@@ -14,7 +14,13 @@ import {
   List,
   RemoveBtn,
 } from "./Modal.styles";
-const { VITE_API_ENDPOINT } = import.meta.env;
+const { VITE_API_ENDPOINT } = process.env;
+
+type City = {
+  id: string;
+  userId: string;
+  cityName: string;
+};
 
 const Modal: React.FC = () => {
   const weather = useSelector((state: RootState) => state.weather);
@@ -22,10 +28,13 @@ const Modal: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    const cityData: any = weather.cityList.find(
-      (city: { id: number }) => city.id === weather.cityId
-    );
-    dispatch(fetchWeather(cityData.cityName));
+    const cityData: City | undefined = weather.cityList.find(
+      (city: City) => String(city.id) === String(weather.cityId)
+    ) as City | undefined;
+
+    if (cityData) {
+      dispatch(fetchWeather(cityData.cityName));
+    }
   }, []);
 
   const handleModalClose = () => {
@@ -35,7 +44,7 @@ const Modal: React.FC = () => {
   const handleCityRemove = async () => {
     await axios.delete(`${VITE_API_ENDPOINT}/cities/${weather.cityId}`);
     if (auth.user) {
-      dispatch(fetchFavCityListData(auth.user?.id));
+      dispatch(fetchFavCityListData(auth.user.id));
       dispatch(handleModal(null));
     }
   };

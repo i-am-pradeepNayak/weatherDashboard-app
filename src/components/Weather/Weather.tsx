@@ -9,10 +9,10 @@ import WeatherForecast from "./WeatherForecast";
 import FavoriteCities from "./FavoriteCities";
 import Modal from "../../Pages/Modal";
 import { LogoutButton, Main } from "./styles/Weather.styles";
-const { VITE_API_ENDPOINT } = import.meta.env;
+const { VITE_API_ENDPOINT } = process.env;
 
 const Weather: React.FC = () => {
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState<string>("");
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const auth = useSelector((state: RootState) => state.auth);
@@ -39,7 +39,6 @@ const Weather: React.FC = () => {
     );
 
     if (cityExist) {
-      console.log("City already exists in the favorite list.");
       return;
     }
 

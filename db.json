@@ -16,6 +16,16 @@
       "id": "fc9e",
       "userId": "1",
       "cityName": "Udupi"
+    },
+    {
+      "id": "1d5d",
+      "userId": "1",
+      "cityName": "Bangalore"
+    },
+    {
+      "id": "f3ac",
+      "userId": "2",
+      "cityName": "mumbai"
     }
   ]
 }
